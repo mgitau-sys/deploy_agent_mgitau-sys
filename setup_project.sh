@@ -52,3 +52,10 @@ if [[ "$updates" == "y" || "$updates" == "Y" ]]; then
 else
 	echo "no changes made"
 fi
+
+# code to check if python 3 exists
+if command -v python3 >/dev/null 2>&1; then
+	echo "Python3 is installed"
+else
+	echo "Python3 is not installed"
+fi
