@@ -23,9 +23,7 @@ bundle_and_exit() {
 
 trap bundle_and_exit SIGINT
 echo "press contor +c to test trap"
-while true; do
-	sleep 1
-done 
+echo ""
 
 mkdir -p "$Parent_Dir"
 touch "$Parent_Dir/attendance_checker.py"
@@ -34,6 +32,11 @@ touch "$Parent_Dir/Helpers/assets.csv"
 touch "$Parent_Dir/Helpers/config.json"
 mkdir -p "$Parent_Dir/reports"
 touch "$Parent_Dir/reports/reports.log"
+
+cp source_files/attendance_checker.py "$Parent_Dir/"
+cp source_files/assets.csv "$Parent_Dir/Helpers/"
+cp source_files/config.json "$Parent_Dir/Helpers/"
+cp source_files/reports.log "$Parent_Dir/reports/"
 
 
 #dynamic configuration of threshold
@@ -53,6 +56,7 @@ else
 	echo "no changes made"
 fi
 
+echo "Running Health check..."
 # code to check if python 3 exists
 if command -v python3 >/dev/null 2>&1; then
 	echo "Python3 is installed"
