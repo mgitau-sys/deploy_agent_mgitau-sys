@@ -58,6 +58,9 @@ touch "$Parent_Dir/reports/reports.log"
 echo "================================="
 echo "Project structure created succefully."
 
+echo "Project structure for '$Parent_Dir':"
+tree "$Parent_Dir"
+
 cp source_files/attendance_checker.py "$Parent_Dir/"
 cp source_files/assets.csv "$Parent_Dir/Helpers/"
 cp source_files/config.json "$Parent_Dir/Helpers/"
