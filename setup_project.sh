@@ -46,11 +46,8 @@ done
 }
 
 trap bundle_and_exit SIGINT
-<<<<<<< HEAD
 echo "press contor +c to test trap"
 echo ""
-=======
->>>>>>> adding error handlers
 
 touch "$Parent_Dir/attendance_checker.py"
 mkdir -p "$Parent_Dir/Helpers"
