@@ -1,4 +1,22 @@
 #!/usr/bin/env bash
+#!/bin/bash
+
+bundle_and_exit() {
+    echo -e "\nInterrupt detected! Bundling parent directory..."
+    if [ -d "$Parent_Dir" ]; then
+        Archive_name="attendance_tracker_${name}_archive_$(date +%s).tar.gz"
+        tar -czf "$Archive_name" "$Parent_Dir"
+        echo "Archive created: $Archive_name"
+        rm -rf "$Parent_Dir"
+        echo "Project directory has been deleted"
+    else
+        echo "No project directory to archive."
+    fi
+    exit 1  # ensures the script stops
+}
+
+trap bundle_and_exit SIGINT
+
 set -euo pipefail
 #prompts the user for input
 read -rp "Enter identifier input:" name
@@ -28,25 +46,7 @@ else
 	break
 fi
 done
-   bundle_and_exit() {
-	exit_code=$? #captures the script exit code
-	echo -e "\nInterrupt detected! Bundling parent directory..."
-	Archive_name="attendance_tracker_${name}_archive_$(date +%s).tar.gz"
-	if [ -d "$Parent_Dir" ]; then
-		tar -czf "$Archive_name" "$Parent_Dir"
-		echo "archive created:$Archive_name"
-		#deleting the incomplete directory
-		echo "deleting incomplete project directory"
-		rm -rf "$Parent_Dir"
-		echo "Project directory has been deleted"
-	else 
-		echo "Project directory '$Parent_Dir' does not exist.Therefore,nothing to archive."
-	fi
-	exit $exit_code
-}
 
-trap bundle_and_exit SIGINT
-echo "press contor +c to test trap"
 echo ""
 
 touch "$Parent_Dir/attendance_checker.py"
